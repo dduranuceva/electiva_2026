@@ -6,8 +6,10 @@ import 'package:electiva_2026/views/pokemons/pokemon_detail_view.dart';
 import 'package:electiva_2026/views/pokemons/pokemon_list_view.dart';
 import 'package:go_router/go_router.dart';
 
+import '../views/camara/camara_view.dart';
 import '../views/ciclo_vida/ciclo_vida_screen.dart';
 import '../views/future/future_view.dart';
+import '../views/gps/gps_view.dart';
 
 final GoRouter appRouter = GoRouter(
   routes: [
@@ -67,6 +69,18 @@ final GoRouter appRouter = GoRouter(
             state.pathParameters['name']!; // se captura el nombre del pokemon.
         return PokemonDetailView(name: name);
       },
+    ),
+    //!Ruta para Cámara
+    GoRoute(
+      path: '/camara',
+      name: 'camara',
+      builder: (context, state) => const CamaraView(),
+    ),
+    //!Ruta para GPS
+    GoRoute(
+      path: '/gps',
+      name: 'gps',
+      builder: (context, state) => const GpsView(),
     ),
   ],
 );
