@@ -2,10 +2,14 @@ import 'package:electiva_2026/views/home/home_screen.dart';
 import 'package:electiva_2026/views/isolate/isolate_view.dart';
 import 'package:electiva_2026/views/paso_parametros/detalle_screen.dart';
 import 'package:electiva_2026/views/paso_parametros/paso_parametros_screen.dart';
+import 'package:electiva_2026/views/pokemons/pokemon_detail_view.dart';
+import 'package:electiva_2026/views/pokemons/pokemon_list_view.dart';
 import 'package:go_router/go_router.dart';
 
+import '../views/camara/camara_view.dart';
 import '../views/ciclo_vida/ciclo_vida_screen.dart';
 import '../views/future/future_view.dart';
+import '../views/gps/gps_view.dart';
 
 final GoRouter appRouter = GoRouter(
   routes: [
@@ -49,6 +53,34 @@ final GoRouter appRouter = GoRouter(
       path: '/future',
       name: 'future',
       builder: (context, state) => const FutureView(),
+    ),
+    //!Ruta para http
+    GoRoute(
+      path: '/pokemons',
+      name: 'pokemons',
+      builder: (context, state) => const PokemonListView(),
+    ),
+    //!Ruta para detalle de pokemones
+    GoRoute(
+      path: '/pokemon/:name', // se recibe el nombre del pokemon como parametro
+      name: 'pokemon_detail',
+      builder: (context, state) {
+        final name =
+            state.pathParameters['name']!; // se captura el nombre del pokemon.
+        return PokemonDetailView(name: name);
+      },
+    ),
+    //!Ruta para Cámara
+    GoRoute(
+      path: '/camara',
+      name: 'camara',
+      builder: (context, state) => const CamaraView(),
+    ),
+    //!Ruta para GPS
+    GoRoute(
+      path: '/gps',
+      name: 'gps',
+      builder: (context, state) => const GpsView(),
     ),
   ],
 );
