@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\usuario\\\\Desktop\\\\flutter uceva\\\\electiva_2026\" -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\usuario\\\\Desktop\\\\flutter uceva\\\\electiva_2026\" -Recurse -Directory | ForEach-Object { $_.FullName } | Sort-Object)",
+      "Bash(flutter pub *)"
+    ]
+  }
+}

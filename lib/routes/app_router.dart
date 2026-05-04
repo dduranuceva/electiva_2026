@@ -1,3 +1,5 @@
+import 'package:electiva_2026/views/auth/login_page.dart';
+import 'package:electiva_2026/views/settings/settings_view.dart';
 import 'package:electiva_2026/views/home/home_screen.dart';
 import 'package:electiva_2026/views/isolate/isolate_view.dart';
 import 'package:electiva_2026/views/paso_parametros/detalle_screen.dart';
@@ -81,6 +83,17 @@ final GoRouter appRouter = GoRouter(
       path: '/gps',
       name: 'gps',
       builder: (context, state) => const GpsView(),
+    ),
+    GoRoute(
+      path: '/login',
+      name: 'login',
+      builder: (context, state) => const LoginPage(),
+    ),
+    //!Ruta para Configuración
+    GoRoute(
+      path: '/settings',
+      name: 'settings',
+      builder: (context, state) => const SettingsView(),
     ),
   ],
 );
