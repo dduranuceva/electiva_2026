@@ -1,4 +1,6 @@
 import 'package:electiva_2026/views/auth/login_page.dart';
+import 'package:electiva_2026/views/categoria_fb/categoria_fb_form_view.dart';
+import 'package:electiva_2026/views/categoria_fb/categoria_fb_list_view.dart';
 import 'package:electiva_2026/views/settings/settings_view.dart';
 import 'package:electiva_2026/views/home/home_screen.dart';
 import 'package:electiva_2026/views/isolate/isolate_view.dart';
@@ -94,6 +96,26 @@ final GoRouter appRouter = GoRouter(
       path: '/settings',
       name: 'settings',
       builder: (context, state) => const SettingsView(),
+    ),
+
+    //! Rutas para el manejo de Categorías (CRUD)
+    GoRoute(
+      path: '/categoriasFirebase',
+      name: 'categoriasFirebase',
+      builder: (context, state) => const CategoriaFbListView(),
+    ),
+    GoRoute(
+      path: '/categoriasfb/create',
+      name: 'categoriasfb.create',
+      builder: (context, state) => const CategoriaFbFormView(),
+    ),
+    GoRoute(
+      path: '/categoriasfb/edit/:id',
+      name: 'categorias.edit',
+      builder: (context, state) {
+        final id = state.pathParameters['id']!;
+        return CategoriaFbFormView(id: id);
+      },
     ),
   ],
 );

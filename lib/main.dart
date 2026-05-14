@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:electiva_2026/providers/theme_provider.dart';
 import 'package:electiva_2026/routes/app_router.dart';
+import 'package:electiva_2026/services/categoria_service.dart';
+import 'package:electiva_2026/services/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'themes/app_theme.dart';
 
@@ -12,6 +17,10 @@ void main() async {
 
   final themeProvider = ThemeProvider();
   await themeProvider.loadTheme();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await NotificationService.init();
+
+  _listenCategoriaChanges();
 
   runApp(
     ChangeNotifierProvider<ThemeProvider>.value(
@@ -19,6 +28,19 @@ void main() async {
       child: const MyApp(),
     ),
   );
+}
+
+void _listenCategoriaChanges() {
+  CategoriaService.watchChanges().listen((change) {
+    final isNew = change.type == DocumentChangeType.added;
+    NotificationService.show(
+      id: change.categoria.id.hashCode.abs(),
+      title: isNew ? 'Nueva categoría' : 'Categoría actualizada',
+      body: isNew
+          ? 'Se agregó: ${change.categoria.nombre}'
+          : 'Se actualizó: ${change.categoria.nombre}',
+    );
+  });
 }
 
 class MyApp extends StatelessWidget {
